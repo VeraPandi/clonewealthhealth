@@ -1,12 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
+   const location = useLocation();
+
    return (
-      <nav>
-         <Link to="/employees" className="employees-list-link">
-            View Current Employees
-         </Link>
+      <nav className="navigation">
+         <span className="navigation-title">View : </span>
+
+         {location.pathname === "/" && (
+            <Link to="/employees" className="employees-list-link">
+               Current Employees
+            </Link>
+         )}
+
+         {location.pathname === "/employees" && (
+            <Link to="/" className="homepage-link">
+               Home
+            </Link>
+         )}
       </nav>
    );
 };

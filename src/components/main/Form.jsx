@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { STATESNAME, STATESCODE } from "../../services/STATES.js";
-import { MOCK_DATA } from "../../services/MOCK_DATA.js";
+import { STATESNAME } from "../../services/STATES.js";
 import { DEPARTMENTS } from "../../services/DEPARTMENTS.js";
 import { employeeAdded } from "../../features/slices.js";
 import { selectAllEmployees } from "../../features/slices";
@@ -11,6 +10,7 @@ import SelectMenu from "./SelectMenu.jsx";
 import Buttons from "./Buttons.jsx";
 import TextFields from "./TextFields.jsx";
 import DatePickers from "./DatePickers.jsx";
+import Subtitle from "../header/Subtitle.jsx";
 
 const Form = () => {
    const dispatch = useDispatch();
@@ -24,37 +24,21 @@ const Form = () => {
    const [dateOfBirth, setDateOfBirth] = useState("");
    const [streetAddress, setStreetAddress] = useState("");
    const [cityAddress, setCityAddress] = useState("");
-   const [stateAddress, setStateAddress] = useState("");
-   //    const [stateCode, setStateCode] = useState("");
+   const [stateNameAddress, setStateNameAddress] = useState("");
    const [codeAddress, setCodeAddress] = useState("");
 
-   const onIdChanged = () => setId(employees.length + 1);
+   const onIdChanged = () => setId(0);
    const onFirstNameChanged = (e) => setFirstName(e.target.value);
    const onLastNameChanged = (e) => setLastName(e.target.value);
    const onStartDateChanged = (e) => setStartDate(e.target.value);
    const onDepartmentChanged = (e) => setDepartment(e.target.value);
-   const ondateOfBirthChanged = (e) => setDateOfBirth(e.target.value);
-   const onstreetAddressChanged = (e) => setStreetAddress(e.target.value);
-   const oncityAddressChanged = (e) => setCityAddress(e.target.value);
-   const onstateAddressChanged = (e) => setStateAddress(e.target.value);
-   //    const onstateCodeChanged = (e) => setStateCode(e.target.value);
-   const oncodeAddressChanged = (e) => setCodeAddress(e.target.value);
+   const onDateOfBirthChanged = (e) => setDateOfBirth(e.target.value);
+   const onStreetAddressChanged = (e) => setStreetAddress(e.target.value);
+   const onCityAddressChanged = (e) => setCityAddress(e.target.value);
+   const onStateNameAddressChanged = (e) => setStateNameAddress(e.target.value);
+   const onCodeAddressChanged = (e) => setCodeAddress(e.target.value);
 
-   //Format Date
-   function padTo2Digits(num) {
-      return num.toString().padStart(2, "0");
-   }
-
-   function formatDate(date) {
-      return [
-         padTo2Digits(date.getMonth() + 1),
-         padTo2Digits(date.getDate()),
-         date.getFullYear(),
-      ].join("/");
-   }
-   //
-
-   const onSavePostClicked = () => {
+   const onSaveEmployee = () => {
       if (
          firstName &&
          lastName &&
@@ -63,8 +47,7 @@ const Form = () => {
          dateOfBirth &&
          streetAddress &&
          cityAddress &&
-         stateAddress &&
-         //  stateCode &&
+         stateNameAddress &&
          codeAddress
       ) {
          dispatch(
@@ -77,8 +60,7 @@ const Form = () => {
                dateOfBirth: formatDate(new Date(dateOfBirth)),
                streetAddress,
                cityAddress,
-               stateAddress,
-               //    stateCode,
+               stateNameAddress,
                codeAddress,
             })
          );
@@ -89,93 +71,138 @@ const Form = () => {
          setDateOfBirth("");
          setStreetAddress("");
          setCityAddress("");
-         setStateAddress("");
-         //  setStateCode("");
+         setStateNameAddress("");
          setCodeAddress("");
       }
    };
 
+   const onResetFields = () => {
+      setFirstName("");
+      setLastName("");
+      setStartDate("");
+      setDepartment("");
+      setDateOfBirth("");
+      setStreetAddress("");
+      setCityAddress("");
+      setStateNameAddress("");
+      setCodeAddress("");
+   };
+
+   // List of options displayed in the select menu
+   const stateNameArray = STATESNAME.map((item, i) => item.stateName);
+
+   // Get the state code to display in the placeholder
+   const match = STATESNAME.find((obj) => obj.stateName === stateNameAddress);
+
+   // Format date
+   function padTo2Digits(num) {
+      return num.toString().padStart(2, "0");
+   }
+   function formatDate(date) {
+      return [
+         padTo2Digits(date.getMonth() + 1),
+         padTo2Digits(date.getDate()),
+         date.getFullYear(),
+      ].join("/");
+   }
+
    return (
-      <div className="form">
-         <div className="identity">
-            <h4>Identity</h4>
-            <TextFields
-               type="text"
-               name="First Name"
-               value={firstName}
-               event={onFirstNameChanged}
-            />
-            <TextFields
-               type="text"
-               name="Last Name"
-               value={lastName}
-               event={onLastNameChanged}
-            />
-            <DatePickers
-               name="Date Of Birth"
-               value={dateOfBirth}
-               event={ondateOfBirthChanged}
-            />
-         </div>
+      <section className="form-wrapper">
+         <Subtitle subtitle="Create Employee" />
 
-         <div className="address">
-            <h4>Address</h4>
-            <TextFields
-               type="text"
-               name="Street"
-               value={streetAddress}
-               event={onstreetAddressChanged}
-            />
-            <TextFields
-               type="text"
-               name="City"
-               value={cityAddress}
-               event={oncityAddressChanged}
-            />
-            <SelectMenu
-               width={320}
-               array={STATESNAME}
-               name="State"
-               value={stateAddress}
-               //    length={stateCode}
-               //    placeholder={stateCode}
-               event={onstateAddressChanged}
-            />
-            <TextFields
-               type="text"
-               name="Zip Code"
-               value={codeAddress}
-               event={oncodeAddressChanged}
-            />
-         </div>
-
-         <div className="status">
-            <h4>Status</h4>
-            <DatePickers
-               name="Start Date"
-               value={startDate}
-               event={onStartDateChanged}
-            />
-            <SelectMenu
-               width={520}
-               array={DEPARTMENTS}
-               name="Department"
-               value={department}
-               event={onDepartmentChanged}
-            />
-         </div>
-
-         <div className="buttons">
-            <Stack spacing={2} direction="row">
-               <Buttons
-                  type="contained"
-                  name="Save"
-                  event={onSavePostClicked}
+         <div className="form">
+            <div className="identity-fields">
+               <h3>Identity</h3>
+               <TextFields
+                  type="text"
+                  name="First Name"
+                  value={firstName}
+                  event={onFirstNameChanged}
                />
-               <Buttons type="outlined" name="Reset" />
-            </Stack>
+               <TextFields
+                  type="text"
+                  name="Last Name"
+                  value={lastName}
+                  event={onLastNameChanged}
+               />
+               <DatePickers
+                  name="Date Of Birth"
+                  value={dateOfBirth}
+                  event={onDateOfBirthChanged}
+               />
+            </div>
+
+            <div className="address-fields">
+               <h3>Address</h3>
+               <TextFields
+                  type="text"
+                  name="Street"
+                  value={streetAddress}
+                  event={onStreetAddressChanged}
+               />
+               <TextFields
+                  type="text"
+                  name="City"
+                  value={cityAddress}
+                  event={onCityAddressChanged}
+               />
+               <SelectMenu
+                  height=""
+                  width="100%"
+                  margin="16px 0 8px"
+                  array={stateNameArray}
+                  name="State"
+                  value={stateNameAddress}
+                  event={onStateNameAddressChanged}
+                  placeholder={match && match.stateCode}
+               />
+               <TextFields
+                  type="text"
+                  name="Zip Code"
+                  value={codeAddress}
+                  event={onCodeAddressChanged}
+               />
+            </div>
+
+            <div className="status-fields">
+               <h3>Status</h3>
+               <div className="fields">
+                  <DatePickers
+                     name="Start Date"
+                     value={startDate}
+                     event={onStartDateChanged}
+                  />
+                  <SelectMenu
+                     height="56px"
+                     width="100%"
+                     margin=""
+                     array={DEPARTMENTS}
+                     name="Department"
+                     value={department}
+                     event={onDepartmentChanged}
+                     placeholder=""
+                  />
+               </div>
+            </div>
+
+            <div className="buttons">
+               <Stack spacing={2} direction="row">
+                  <Buttons
+                     className="submit-btn"
+                     name="Save"
+                     type="button"
+                     event={onSaveEmployee}
+                  />
+                  <Buttons
+                     className="reset-btn"
+                     name="Reset"
+                     type="button"
+                     event={onResetFields}
+                  />
+               </Stack>
+            </div>
          </div>
-      </div>
+      </section>
    );
 };
 

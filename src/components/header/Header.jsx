@@ -1,10 +1,13 @@
 import React from "react";
 import MainTitle from "../header/MainTitle";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
    return (
-      <header>
-         <MainTitle title="HRnet" />
+      <header className="header">
+         <img className="logo" src={logo} alt="logo de SportSee" />
+         <MainTitle title="Wealth Health" id="society-name" />
+         <MainTitle title="HRnet" id="dashboard-name" />
       </header>
    );
 };

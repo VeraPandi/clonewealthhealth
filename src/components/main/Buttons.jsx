@@ -1,11 +1,10 @@
 import React from "react";
-import Button from "@mui/material/Button";
 
-const Buttons = ({ name, event, type }) => {
+const Buttons = ({ name, event, type, className }) => {
    return (
-      <Button variant={type} onClick={event}>
+      <button type={type} className={className} onClick={event}>
          {name}
-      </Button>
+      </button>
    );
 };
 

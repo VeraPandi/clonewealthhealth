@@ -1,16 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Table from "../components/main/Table";
-import Subtitle from "../components/header/Subtitle";
+import Header from "../components/header/Header";
+import Navigation from "../components/header/Navigation";
 
 const EmployeeList = () => {
    return (
       <div className="employees-page">
-         <Link to="/" className="back-home-link">
-            Back home
-         </Link>
-         <main>
-            <Subtitle subtitle="Current Employees" />
+         <Header />
+         <Navigation />
+         <main className="main">
             <Table />
          </main>
       </div>

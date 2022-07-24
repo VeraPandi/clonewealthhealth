@@ -1,9 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAllEmployees } from "../../features/slices";
 import { DataGrid } from "@mui/x-data-grid";
-// import SearchBar from "./SearchBar";
-import { MOCK_DATA } from "../../services/MOCK_DATA";
+import Box from "@mui/material/Box";
+import Subtitle from "../header/Subtitle.jsx";
 
 const Table = () => {
    const employees = useSelector(selectAllEmployees);
@@ -12,77 +13,120 @@ const Table = () => {
       {
          field: "firstName",
          headerName: "First name",
-         width: 130,
+         headerClassName: "firstName",
+         width: 150,
       },
       {
          field: "lastName",
          headerName: "Last name",
-         width: 130,
+         headerClassName: "lastName",
+         width: 150,
       },
       {
          field: "startDate",
          headerName: "Start Date",
-         width: 130,
+         headerClassName: "startDate",
+         width: 150,
       },
       {
          field: "department",
          headerName: "Department",
-         width: 130,
+         headerClassName: "department",
+         width: 220,
       },
       {
          field: "dateOfBirth",
          headerName: "Date of Birth",
-         width: 130,
+         headerClassName: "dateOfBirth",
+         width: 150,
       },
       {
          field: "streetAddress",
          headerName: "Street",
-         width: 130,
+         headerClassName: "streetAddress",
+         width: 240,
       },
-      { field: "cityAddress", headerName: "City", width: 130 },
       {
-         field: "stateAddress",
+         field: "cityAddress",
+         headerName: "City",
+         headerClassName: "cityAddress",
+         width: 160,
+      },
+      {
+         field: "stateNameAddress",
          headerName: "State",
-         width: 130,
+         headerClassName: "stateNameAddress",
+         width: 160,
       },
       {
          field: "codeAddress",
          headerName: "Zip Code",
-         width: 130,
+         headerClassName: "codeAddress",
+         width: 96,
       },
    ];
 
+   const [pageSize, setPageSize] = useState(5);
+
    return (
-      <main>
-         <div style={{ height: 300, width: "100%", overflow: "visible" }}>
-            {/* <SearchBar array={employees} /> */}
-            <DataGrid
-               rows={employees}
-               columns={columns}
-               pageSize={10}
-               rowsPerPageOptions={[10, 20, 50]}
-            />
-         </div>
-      </main>
+      <>
+         <Subtitle subtitle="Current employees" />
+         <main className="table-wrapper">
+            <div
+               className="table"
+               style={{
+                  height:
+                     (pageSize === 5 && 414) ||
+                     (pageSize === 10 && 714) ||
+                     (pageSize === 20 && 1314),
+                  overflow: "visible",
+                  width: "100%",
+                  maxWidth: "1478px",
+                  boxShadow: "6px 6px 5px #6f85093d",
+                  borderRadius: 20,
+               }}
+            >
+               <Box
+                  sx={{
+                     height: "100%",
+                     width: "100%",
+                     "& .firstName,.lastName,.startDate,.department,.dateOfBirth,.streetAddress,.cityAddress,.stateNameAddress,.codeAddress":
+                        {
+                           backgroundColor: "#b3bb99",
+                           color: "#1e2600",
+                           textTransform: "uppercase",
+                           fontFamily: "Montserrat",
+                        },
+                  }}
+               >
+                  <DataGrid
+                     initialState={{
+                        pagination: {
+                           pageSize: 5,
+                        },
+                     }}
+                     style={{
+                        height: "100%",
+                        overflow: "visible",
+                        backgroundColor: "#fff",
+                        borderRadius: "0 0 20px 20px",
+                     }}
+                     rows={employees}
+                     columns={columns}
+                     pageSize={pageSize}
+                     onPageSizeChange={(newPageSize) =>
+                        setPageSize(newPageSize)
+                     }
+                     rowsPerPageOptions={[5, 10, 20]}
+                     pagination
+                     rowHeight={60}
+                     {...employees}
+                  />
+               </Box>
+            </div>
+         </main>
+      </>
    );
 };
-
-// const test = [
-//    {
-//       lastName: "Gwynne",
-//       startDate: "01/04/2013",
-//       department: "Engineering",
-//    },
-//    {
-//       lastName: "Dudley",
-//       startDate: "05/25/2022",
-//       department: "Engineering",
-//    },
-//    {
-//       lastName: "Hills",
-//       startDate: "08/25/2010",
-//       department: "Legal",
-//    },
-// ];
 
 export default Table;

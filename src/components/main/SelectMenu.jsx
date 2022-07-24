@@ -4,34 +4,45 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { STATESCODE } from "../../services/STATES";
 
-const SelectMenu = ({ array, name, event, value, width }) => {
+const SelectMenu = ({
+   array,
+   name,
+   event,
+   value,
+   width,
+   placeholder,
+   height,
+   margin,
+}) => {
    return (
       <Box
          component="form"
          sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
+            "& > :not(style)": {
+               width: { width },
+               height: { height },
+               margin: { margin },
+            },
          }}
          noValidate
          autoComplete="off"
       >
-         <FormControl variant="filled" sx={{ m: 1, minWidth: { width } }}>
-            <InputLabel id="demo-simple-select-filled-label">{name}</InputLabel>
+         <FormControl sx={{ width: { width }, height: { height } }}>
+            <InputLabel id="demo-simple-select-label">{name}</InputLabel>
             <Select
-               labelId="demo-simple-select-standard-label"
-               id={`demo-simple-select-standard ${name}`}
+               labelId="demo-simple-select-label"
+               id={`demo-simple-select ${name}`}
                value={value}
                onChange={event}
                label={name}
-               //    data-length={length}
-               //    placeholder={placeholder}
+               placeholder={placeholder}
             >
                <MenuItem value="">
                   <em>None</em>
                </MenuItem>
                {array.map((item, i) => (
-                  <MenuItem key={i} value={item} placeholder={i}>
+                  <MenuItem key={item} value={item}>
                      {item}
                   </MenuItem>
                ))}

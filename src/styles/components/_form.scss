@@ -1,0 +1,76 @@
+.form-wrapper {
+   padding: 20px 0;
+}
+
+.form {
+   display: flex;
+   justify-content: flex-start;
+   flex-wrap: wrap;
+   padding: 80px 40px 40px 40px;
+   border: 1px solid #6f850954;
+   border-radius: 0 0 20px 20px;
+   box-shadow: 6px 6px 5px #6f85093d;
+}
+
+.identity-fields,
+.address-fields {
+   display: flex;
+   flex-direction: column;
+   min-width: 45%;
+   margin: 20px auto;
+   padding: 6px;
+
+   @media (max-width: 851px) {
+      min-width: 100%;
+   }
+}
+
+.fields {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+
+   @media (max-width: 953px) {
+      flex-wrap: wrap;
+      width: 100%;
+   }
+}
+
+.status-fields {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 45%;
+   margin: 2.5%;
+
+   @media (max-width: 1400px) {
+      width: 100%;
+   }
+
+   @media (max-width: 851px) {
+      margin: 40px auto;
+      padding: 6px;
+   }
+}
+
+.fields .css-1o883tc-MuiStack-root {
+   min-width: 47.5%;
+   padding-right: 6px;
+
+   @media (max-width: 953px) {
+      min-width: 100%;
+      padding-right: inherit;
+   }
+}
+
+.fields .MuiBox-root {
+   min-width: 47.5%;
+   padding-left: 6px;
+
+   @media (max-width: 953px) {
+      min-width: 100%;
+      margin: 7px 0;
+      padding-left: inherit;
+   }
+}

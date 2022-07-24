@@ -1,7 +1,6 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { MOCK_DATA } from "../../services/MOCK_DATA";
 
 const SearchBar = ({ array }) => {
    return (

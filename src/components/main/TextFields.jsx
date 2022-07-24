@@ -9,6 +9,8 @@ const TextFields = ({ name, value, event, type }) => {
          label={name}
          value={value}
          onChange={event}
+         margin="normal"
+         fullWidth
       />
    );
 };

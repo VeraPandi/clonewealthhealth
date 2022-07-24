@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { MOCK_DATA } from "../services/MOCK_DATA";
+
 const initialState = MOCK_DATA;
 
 const employeesSlice = createSlice({

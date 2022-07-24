@@ -1,3 +1,13 @@
-// body {
-//    background-color: pink;
-// }
+@use "./base/global";
+
+@use "./components/form";
+@use "./components/table";
+
+@use "./layout/button";
+@use "./layout/logo";
+@use "./layout/header";
+@use "./layout/navigation";
+@use "./layout/mainTitle";
+
+@use "./pages/home";
+@use "./pages/employees";
