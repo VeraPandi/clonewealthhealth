@@ -5,7 +5,7 @@ import "./styles/main.scss";
 
 function App() {
    return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employees" element={<Employees />} />

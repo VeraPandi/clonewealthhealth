@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { STATESNAME } from "../../services/STATES.js";
 import { DEPARTMENTS } from "../../services/DEPARTMENTS.js";
-import { employeeAdded } from "../../features/slices.js";
-import { selectAllEmployees } from "../../features/slices";
+import { employeeAdded, selectAllEmployees } from "../../features/slices.js";
 import Stack from "@mui/material/Stack";
+import { TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SelectMenu from "./SelectMenu.jsx";
 import Buttons from "./Buttons.jsx";
 import TextFields from "./TextFields.jsx";
@@ -19,9 +21,9 @@ const Form = () => {
    const [id, setId] = useState(0);
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
-   const [startDate, setStartDate] = useState("");
+   const [startDate, setStartDate] = useState(null);
    const [department, setDepartment] = useState("");
-   const [dateOfBirth, setDateOfBirth] = useState("");
+   const [dateOfBirth, setDateOfBirth] = useState(null);
    const [streetAddress, setStreetAddress] = useState("");
    const [cityAddress, setCityAddress] = useState("");
    const [stateNameAddress, setStateNameAddress] = useState("");
@@ -64,11 +66,12 @@ const Form = () => {
                codeAddress,
             })
          );
+
          setFirstName("");
          setLastName("");
-         setStartDate("");
+         setStartDate(null);
          setDepartment("");
-         setDateOfBirth("");
+         setDateOfBirth(null);
          setStreetAddress("");
          setCityAddress("");
          setStateNameAddress("");
@@ -79,9 +82,9 @@ const Form = () => {
    const onResetFields = () => {
       setFirstName("");
       setLastName("");
-      setStartDate("");
+      setStartDate(null);
       setDepartment("");
-      setDateOfBirth("");
+      setDateOfBirth(null);
       setStreetAddress("");
       setCityAddress("");
       setStateNameAddress("");
@@ -111,96 +114,104 @@ const Form = () => {
          <Subtitle subtitle="Create Employee" />
 
          <div className="form">
-            <div className="identity-fields">
-               <h3>Identity</h3>
-               <TextFields
-                  type="text"
-                  name="First Name"
-                  value={firstName}
-                  event={onFirstNameChanged}
-               />
-               <TextFields
-                  type="text"
-                  name="Last Name"
-                  value={lastName}
-                  event={onLastNameChanged}
-               />
-               <DatePickers
-                  name="Date Of Birth"
-                  value={dateOfBirth}
-                  event={onDateOfBirthChanged}
-               />
-            </div>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+               <div className="identity-fields">
+                  <h3>Identity</h3>
+                  <TextFields
+                     type="text"
+                     name="First Name"
+                     value={firstName}
+                     event={onFirstNameChanged}
+                  />
+                  <TextFields
+                     type="text"
+                     name="Last Name"
+                     value={lastName}
+                     event={onLastNameChanged}
+                  />
+                  <Stack margin="16px 0">
+                     <DatePicker
+                        label="Date Picker"
+                        renderInput={(params) => <TextField {...params} />}
+                        value={dateOfBirth}
+                        onChange={(newValue) => setDateOfBirth(newValue)}
+                     />
+                  </Stack>
+               </div>
 
-            <div className="address-fields">
-               <h3>Address</h3>
-               <TextFields
-                  type="text"
-                  name="Street"
-                  value={streetAddress}
-                  event={onStreetAddressChanged}
-               />
-               <TextFields
-                  type="text"
-                  name="City"
-                  value={cityAddress}
-                  event={onCityAddressChanged}
-               />
-               <SelectMenu
-                  height=""
-                  width="100%"
-                  margin="16px 0 8px"
-                  array={stateNameArray}
-                  name="State"
-                  value={stateNameAddress}
-                  event={onStateNameAddressChanged}
-                  placeholder={match && match.stateCode}
-               />
-               <TextFields
-                  type="text"
-                  name="Zip Code"
-                  value={codeAddress}
-                  event={onCodeAddressChanged}
-               />
-            </div>
-
-            <div className="status-fields">
-               <h3>Status</h3>
-               <div className="fields">
-                  <DatePickers
-                     name="Start Date"
-                     value={startDate}
-                     event={onStartDateChanged}
+               <div className="address-fields">
+                  <h3>Address</h3>
+                  <TextFields
+                     type="text"
+                     name="Street"
+                     value={streetAddress}
+                     event={onStreetAddressChanged}
+                  />
+                  <TextFields
+                     type="text"
+                     name="City"
+                     value={cityAddress}
+                     event={onCityAddressChanged}
                   />
                   <SelectMenu
-                     height="56px"
+                     height=""
                      width="100%"
-                     margin=""
-                     array={DEPARTMENTS}
-                     name="Department"
-                     value={department}
-                     event={onDepartmentChanged}
-                     placeholder=""
+                     margin="16px 0 8px"
+                     array={stateNameArray}
+                     name="State"
+                     value={stateNameAddress}
+                     event={onStateNameAddressChanged}
+                     placeholder={match && match.stateCode}
+                  />
+                  <TextFields
+                     type="text"
+                     name="Zip Code"
+                     value={codeAddress}
+                     event={onCodeAddressChanged}
                   />
                </div>
-            </div>
 
-            <div className="buttons">
-               <Stack spacing={2} direction="row">
-                  <Buttons
-                     className="submit-btn"
-                     name="Save"
-                     type="button"
-                     event={onSaveEmployee}
-                  />
-                  <Buttons
-                     className="reset-btn"
-                     name="Reset"
-                     type="button"
-                     event={onResetFields}
-                  />
-               </Stack>
-            </div>
+               <div className="status-fields">
+                  <h3>Status</h3>
+                  <div className="fields">
+                     <Stack margin="16px 0">
+                        <DatePicker
+                           label="Date Picker"
+                           renderInput={(params) => <TextField {...params} />}
+                           value={startDate}
+                           onChange={(newValue) => setStartDate(newValue)}
+                        />
+                     </Stack>
+                     <SelectMenu
+                        height="56px"
+                        width="100%"
+                        margin=""
+                        array={DEPARTMENTS}
+                        name="Department"
+                        value={department}
+                        event={onDepartmentChanged}
+                        placeholder=""
+                     />
+                  </div>
+               </div>
+
+               <div className="buttons">
+                  <Stack spacing={2} direction="row">
+                     <Buttons
+                        className="submit-btn"
+                        name="Save"
+                        type="button"
+                        event={onSaveEmployee}
+                     />
+                     <Buttons
+                        className="reset-btn"
+                        name="Reset"
+                        type="button"
+                        event={onResetFields}
+                     />
+                  </Stack>
+               </div>
+            </LocalizationProvider>
          </div>
       </section>
    );

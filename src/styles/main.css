@@ -23,58 +23,26 @@ label {
   letter-spacing: 1.5px;
 }
 
-body {
-  font-family: "Supra Rounded", sans-serif;
-  text-transform: uppercase;
-  font-weight: normal;
-}
-
-h1,
-h2 {
-  letter-spacing: 1.5px;
-  color: #2a3500;
-}
-
-h2 {
-  font-weight: normal;
-}
-
-h3 {
-  font-size: 16px;
-  letter-spacing: 0.8px;
-}
-
-label {
-  letter-spacing: 1.5px;
-}
-
 .form-wrapper {
   padding: 20px 0;
 }
 
 .form {
   display: flex;
-  flex-wrap: wrap;
-  padding: 40px;
-  border-radius: 10px;
-  border: 1px solid rgba(111, 133, 9, 0.3294117647);
-  box-shadow: 6px 6px 5px rgba(111, 133, 9, 0.2392156863);
   justify-content: flex-start;
-  display: flex;
   flex-wrap: wrap;
   padding: 80px 40px 40px 40px;
-  border-radius: 0 0 20px 20px;
   border: 1px solid rgba(111, 133, 9, 0.3294117647);
+  border-radius: 0 0 20px 20px;
   box-shadow: 6px 6px 5px rgba(111, 133, 9, 0.2392156863);
-  justify-content: flex-start;
 }
 
 .identity-fields,
 .address-fields {
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
   min-width: 45%;
+  margin: 20px auto;
   padding: 6px;
 }
 @media (max-width: 851px) {
@@ -85,24 +53,24 @@ label {
 }
 
 .fields {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 @media (max-width: 953px) {
   .fields {
-    width: 100%;
     flex-wrap: wrap;
+    width: 100%;
   }
 }
 
 .status-fields {
-  margin: 2.5%;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
   width: 45%;
+  margin: 2.5%;
 }
 @media (max-width: 1400px) {
   .status-fields {
@@ -134,18 +102,22 @@ label {
 @media (max-width: 953px) {
   .fields .MuiBox-root {
     min-width: 100%;
-    padding-left: inherit;
     margin: 7px 0;
+    padding-left: inherit;
   }
 }
 
-/* Employees page */
-.table-main {
-  margin: 80px;
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 44px 0 60px;
+  text-transform: none;
 }
-
-.table {
-  width: 1728px;
+@media (max-width: 594px) {
+  .table-wrapper {
+    margin: 23px 0 60px;
+  }
 }
 
 .MuiDataGrid-row:nth-child(odd) {
@@ -154,6 +126,10 @@ label {
 
 .MuiDataGrid-row:nth-child(even) {
   background: rgba(111, 133, 9, 0.0588235294);
+}
+
+.css-ptiqhd-MuiSvgIcon-root {
+  fill: #fff;
 }
 
 .buttons {
@@ -173,42 +149,41 @@ label {
 
 .submit-btn,
 .reset-btn {
-  outline: 0;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 500;
+  min-width: 76px;
+  padding: 6px 16px;
   font-size: 0.875rem;
   line-height: 1.75;
-  letter-spacing: 0.02857em;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  min-width: 64px;
-  padding: 6px 16px;
   border-radius: 4px;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-style: none;
   color: #fff;
   background-color: #596e07;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.1411764706), 0px 1px 5px 0px rgba(0, 0, 0, 0.1215686275);
-  border-style: none;
-  border: 1px dotted transparent;
+  cursor: pointer;
+}
+.submit-btn:hover,
+.reset-btn:hover {
+  background-color: #435500;
+  color: #fff;
+  transition: background-color 200ms cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 .submit-btn:active,
 .reset-btn:active {
-  text-decoration: none;
-  background-color: #1565c0;
+  background-color: #344201;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.1411764706), 0px 1px 10px 0px rgba(0, 0, 0, 0.1215686275);
+  transition: background-color 200ms cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
 .reset-btn {
-  background-color: transparent;
-  outline: 0;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border: 1px solid #596e07;
+  background-color: transparent;
   color: #596e07;
 }
 .reset-btn:active {
-  background-color: #596e07;
   border: 1px solid #596e07;
+  background-color: #344201;
+  color: #fff;
 }
 
 .logo {
@@ -224,29 +199,35 @@ label {
 
 .navigation {
   position: relative;
-  text-align: end;
   top: 45px;
   padding: 20px;
   border-radius: 20px 20px 0 0;
   border: 1px solid rgba(67, 85, 0, 0.3882352941);
+  text-align: end;
   background-color: #435500;
 }
 
 .navigation-title {
-  color: #d8f07d;
+  font-size: 15px;
   font-style: italic;
   font-weight: bold;
+  letter-spacing: 1px;
+  color: #d8f07d;
 }
 
-.employees-list-link {
+.employees-list-link,
+.homepage-link {
+  padding: 10px;
   border-radius: 10px;
   text-decoration: none;
   color: rgba(251, 255, 239, 0.9019607843);
-  padding: 10px;
 }
-.employees-list-link:hover {
-  background-color: #596e07;
-  color: #fff;
+.employees-list-link:hover,
+.homepage-link:hover {
+  padding-left: 39px;
+  transition: all 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  font-weight: bold;
+  color: #d2ddad;
 }
 
 #society-name {
@@ -255,8 +236,11 @@ label {
 }
 @media (max-width: 660px) {
   #society-name {
-    top: 7px;
-    left: 188px;
+    display: flex;
+    justify-content: flex-end;
+    top: -7px;
+    right: 0;
+    text-align: right;
   }
 }
 
@@ -266,28 +250,25 @@ label {
 }
 @media (max-width: 660px) {
   #dashboard-name {
-    top: 84px;
-    right: 99px;
+    display: flex;
+    justify-content: flex-end;
+    top: 65px;
+    right: 0;
   }
 }
 
-.homepage {
+.page {
   margin: 41px 140px;
 }
 @media (max-width: 851px) {
-  .homepage {
+  .page {
     margin: 80px 60px;
   }
 }
 @media (max-width: 575px) {
-  .homepage {
+  .page {
     margin: 80px 30px;
   }
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .title {
@@ -295,11 +276,65 @@ label {
 }
 
 .subtitle {
-  margin: 0;
-  font-size: 18px;
   position: relative;
-  color: #000;
   top: 64px;
   left: 63px;
+  margin: 0;
+  font-size: 18px;
+  color: #000;
+}
+
+.employees-page {
+  margin: 42px 80px;
+}
+
+@media (min-width: 1655px) {
+  .employees-page .header {
+    max-width: 1480px;
+    margin: auto;
+    margin-bottom: -21px;
+  }
+}
+
+.employees-page .subtitle {
+  width: 55%;
+  top: 23px;
+  left: 32px;
+  color: #fff;
+}
+@media (max-width: 595px) {
+  .employees-page .subtitle {
+    top: 13px;
+  }
+}
+
+.employees-page .navigation {
+  position: relative;
+  text-align: end;
+  top: 64px;
+  padding: 20px;
+  border: 1px solid rgba(67, 85, 0, 0.3882352941);
+  border-radius: 20px 20px 0 0;
+  background-color: #435500;
+}
+@media (min-width: 1655px) {
+  .employees-page .navigation {
+    max-width: 1434px;
+    margin: auto;
+  }
+}
+
+.employees-page .main {
+  max-width: 1479px;
+  margin: auto;
+}
+
+@media (max-width: 690px) {
+  .employees-page #dashboard-name {
+    display: flex;
+    justify-content: flex-end;
+    top: 65px;
+    right: 0;
+  }
 }
 /*# sourceMappingURL=main.css.map */

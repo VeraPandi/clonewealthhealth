@@ -1,13 +1,16 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAllEmployees } from "../../features/slices";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Subtitle from "../header/Subtitle.jsx";
+import SearchBar from "./SearchBar";
 
 const Table = () => {
    const employees = useSelector(selectAllEmployees);
+
+   const [data, setData] = useState(employees);
+   const [pageSize, setPageSize] = useState(5);
 
    const columns = [
       {
@@ -66,10 +69,14 @@ const Table = () => {
       },
    ];
 
-   const [pageSize, setPageSize] = useState(5);
-
    return (
       <>
+         {data.length < employees.length ? (
+            <SearchBar array={employees} setData={setData} />
+         ) : (
+            <SearchBar array={data} setData={setData} />
+         )}
+
          <Subtitle subtitle="Current employees" />
          <main className="table-wrapper">
             <div
@@ -111,7 +118,7 @@ const Table = () => {
                         backgroundColor: "#fff",
                         borderRadius: "0 0 20px 20px",
                      }}
-                     rows={employees}
+                     rows={data}
                      columns={columns}
                      pageSize={pageSize}
                      onPageSizeChange={(newPageSize) =>
@@ -120,7 +127,7 @@ const Table = () => {
                      rowsPerPageOptions={[5, 10, 20]}
                      pagination
                      rowHeight={60}
-                     {...employees}
+                     {...data}
                   />
                </Box>
             </div>
