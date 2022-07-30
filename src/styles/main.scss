@@ -2,13 +2,10 @@
 
 @use "./components/form";
 @use "./components/table";
+@use "./components/sidebar";
 
 @use "./layout/button";
 @use "./layout/logo";
 @use "./layout/header";
 @use "./layout/navigation";
-@use "./layout/mainTitle";
 @use "./layout/searchBar";
-
-@use "./pages/home";
-@use "./pages/employees";

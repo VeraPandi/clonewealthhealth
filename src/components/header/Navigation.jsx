@@ -6,19 +6,27 @@ const Navigation = () => {
 
    return (
       <nav className="navigation">
-         <span className="navigation-title">View : </span>
+         <Link
+            to="/"
+            className={
+               location.pathname === "/"
+                  ? "nav-link home active"
+                  : "nav-link home"
+            }
+         >
+            Create employee
+         </Link>
 
-         {location.pathname === "/" && (
-            <Link to="/employees" className="employees-list-link">
-               Current Employees
-            </Link>
-         )}
-
-         {location.pathname === "/employees" && (
-            <Link to="/" className="homepage-link">
-               Home
-            </Link>
-         )}
+         <Link
+            to="/employees"
+            className={
+               location.pathname === "/employees"
+                  ? "nav-link employees active"
+                  : "nav-link employees"
+            }
+         >
+            View employees
+         </Link>
       </nav>
    );
 };

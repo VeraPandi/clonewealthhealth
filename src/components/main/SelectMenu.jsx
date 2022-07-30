@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 const SelectMenu = ({
    array,
    name,
+   id,
    event,
    value,
    width,
@@ -24,6 +25,13 @@ const SelectMenu = ({
                height: { height },
                margin: { margin },
             },
+            // Outline and label color
+            "& .MuiInputLabel-root.Mui-focused": { color: "#000" },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+               "& > fieldset": {
+                  borderColor: "#93ad18",
+               },
+            },
          }}
          noValidate
          autoComplete="off"
@@ -31,8 +39,7 @@ const SelectMenu = ({
          <FormControl sx={{ width: { width }, height: { height } }}>
             <InputLabel id="demo-simple-select-label">{name}</InputLabel>
             <Select
-               labelId="demo-simple-select-label"
-               id={`demo-simple-select ${name}`}
+               id={id}
                value={value}
                onChange={event}
                label={name}

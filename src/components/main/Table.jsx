@@ -3,8 +3,16 @@ import { useSelector } from "react-redux";
 import { selectAllEmployees } from "../../features/slices";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import Subtitle from "../header/Subtitle.jsx";
 import SearchBar from "./SearchBar";
+
+/**
+ * Displays a table of current employees
+ * @const {array} employees - List of all employees displayed in the table
+ * @const {array} data - List of filtered employees
+ * @const {number} pageSize - Number of rows displayed in the table
+ * @const {array} columns - Columns in the table
+ * @return {JSX.Element} - Table
+ */
 
 const Table = () => {
    const employees = useSelector(selectAllEmployees);
@@ -77,8 +85,7 @@ const Table = () => {
             <SearchBar array={data} setData={setData} />
          )}
 
-         <Subtitle subtitle="Current employees" />
-         <main className="table-wrapper">
+         <section className="table-wrapper">
             <div
                className="table"
                style={{
@@ -86,10 +93,9 @@ const Table = () => {
                      (pageSize === 5 && 414) ||
                      (pageSize === 10 && 714) ||
                      (pageSize === 20 && 1314),
-                  overflow: "visible",
                   width: "100%",
                   maxWidth: "1478px",
-                  boxShadow: "6px 6px 5px #6f85093d",
+                  overflow: "visible",
                   borderRadius: 20,
                }}
             >
@@ -99,10 +105,10 @@ const Table = () => {
                      width: "100%",
                      "& .firstName,.lastName,.startDate,.department,.dateOfBirth,.streetAddress,.cityAddress,.stateNameAddress,.codeAddress":
                         {
-                           backgroundColor: "#b3bb99",
-                           color: "#1e2600",
+                           fontSize: "15px",
                            textTransform: "uppercase",
-                           fontFamily: "Montserrat",
+                           color: "#d2ddad",
+                           backgroundColor: "#435500",
                         },
                   }}
                >
@@ -115,8 +121,8 @@ const Table = () => {
                      style={{
                         height: "100%",
                         overflow: "visible",
+                        borderRadius: 20,
                         backgroundColor: "#fff",
-                        borderRadius: "0 0 20px 20px",
                      }}
                      rows={data}
                      columns={columns}
@@ -131,7 +137,7 @@ const Table = () => {
                   />
                </Box>
             </div>
-         </main>
+         </section>
       </>
    );
 };

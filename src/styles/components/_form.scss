@@ -1,15 +1,29 @@
 .form-wrapper {
-   padding: 20px 0;
+   @media (max-width: 760px) {
+      position: relative;
+      top: 32px;
+   }
+
+   @media (max-width: 620px) {
+      top: -8px;
+   }
 }
 
 .form {
    display: flex;
    justify-content: flex-start;
    flex-wrap: wrap;
-   padding: 80px 40px 40px 40px;
+   padding: 40px;
    border: 1px solid #6f850954;
-   border-radius: 0 0 20px 20px;
-   box-shadow: 6px 6px 5px #6f85093d;
+   border-radius: 20px;
+
+   @media (min-width: 1500px) {
+      margin: 0 60px;
+   }
+
+   @media (max-width: 851px) {
+      padding: 60px 50px 40px 40px;
+   }
 }
 
 .identity-fields,
@@ -22,6 +36,7 @@
 
    @media (max-width: 851px) {
       min-width: 100%;
+      margin: auto;
    }
 }
 
@@ -49,8 +64,9 @@
    }
 
    @media (max-width: 851px) {
-      margin: 40px auto;
-      padding: 6px;
+      margin-left: 7px;
+      margin-right: -5px;
+      padding: 20px 0 10px;
    }
 }
 

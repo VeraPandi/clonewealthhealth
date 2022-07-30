@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import TextFields from "./TextFields";
 
+/**
+ * Displays a Search bar
+ * @property {array} array - List of all employees displayed in the table
+ * @property {function} setData - Filters the elements present in the array
+ * @const {string} searchText - Text entered in the search field
+ * @const {array} excludeColumns - Colones excluded in the table
+ * @function filterData - Returns employees whose information matches the text entered in the search field
+ * @return {JSX.Element} - Search bar
+ */
+
 const SearchBar = ({ array, setData }) => {
    const [searchText, setSearchText] = useState("");
 
    const excludeColumns = ["id"];
 
-   const handleChange = (value) => {
+   const onChange = (value) => {
       setSearchText(value);
       filterData(value);
    };
@@ -35,7 +45,7 @@ const SearchBar = ({ array, setData }) => {
             type="search"
             name="Search"
             value={searchText}
-            event={(e) => handleChange(e.target.value)}
+            event={(e) => onChange(e.target.value)}
          />
       </div>
    );

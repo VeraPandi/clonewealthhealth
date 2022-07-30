@@ -1,9 +1,13 @@
-#search {
-   height: 50px;
+.search-bar {
+   display: flex;
+   justify-content: end;
+   margin: 0 12px;
+}
+
+#Search {
    width: 320px;
    border-style: groove;
-   border: 1px solid #435500;
-   border-radius: 10px;
+   border-radius: 5px;
    font-size: 16px;
    text-transform: uppercase;
    cursor: pointer;

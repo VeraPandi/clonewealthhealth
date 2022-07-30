@@ -6,7 +6,7 @@ body {
 
 h1,
 h2 {
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: #2a3500;
 }
 
@@ -16,25 +16,84 @@ h2 {
 
 h3 {
   font-size: 16px;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
 }
 
 label {
   letter-spacing: 1.5px;
 }
 
+.PAGE1 {
+  display: flex;
+  margin: 40px auto;
+  margin: 0 80px 40px;
+}
+@media (max-width: 1500px) {
+  .PAGE1 {
+    margin: 0 40px 40px;
+  }
+}
+@media (max-width: 1000px) {
+  .PAGE1 {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 40px;
+  }
+}
+
+.sidebar {
+  margin: auto 80px auto 0;
+  margin: auto 80px;
+}
+@media (max-width: 1760px) {
+  .sidebar {
+    margin: auto 40px auto 0;
+  }
+}
+@media (max-width: 1500px) {
+  .sidebar {
+    margin: auto 50px auto 0;
+  }
+}
+@media (max-width: 1000px) {
+  .sidebar {
+    margin: auto;
+  }
+}
+
 .form-wrapper {
-  padding: 20px 0;
+  padding: 20px 0 45px;
+}
+@media (max-width: 760px) {
+  .form-wrapper {
+    position: relative;
+    top: 32px;
+  }
+}
+@media (max-width: 620px) {
+  .form-wrapper {
+    top: -8px;
+  }
 }
 
 .form {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 80px 40px 40px 40px;
+  padding: 40px;
   border: 1px solid rgba(111, 133, 9, 0.3294117647);
-  border-radius: 0 0 20px 20px;
+  border-radius: 20px;
   box-shadow: 6px 6px 5px rgba(111, 133, 9, 0.2392156863);
+}
+@media (min-width: 1500px) {
+  .form {
+    margin: 0 60px;
+  }
+}
+@media (max-width: 851px) {
+  .form {
+    padding: 60px 50px 40px 40px;
+  }
 }
 
 .identity-fields,
@@ -49,6 +108,7 @@ label {
   .identity-fields,
 .address-fields {
     min-width: 100%;
+    margin: auto;
   }
 }
 
@@ -79,8 +139,10 @@ label {
 }
 @media (max-width: 851px) {
   .status-fields {
-    margin: 40px auto;
-    padding: 6px;
+    margin: 0;
+    margin-left: 7px;
+    margin-right: -5px;
+    padding: 20px 0 10px;
   }
 }
 
@@ -112,11 +174,11 @@ label {
   flex-direction: column;
   align-items: center;
   margin: 44px 0 60px;
-  text-transform: none;
+  text-transform: uppercase;
 }
-@media (max-width: 594px) {
+@media (max-width: 641px) {
   .table-wrapper {
-    margin: 23px 0 60px;
+    margin: 64px 0 60px;
   }
 }
 
@@ -128,8 +190,16 @@ label {
   background: rgba(111, 133, 9, 0.0588235294);
 }
 
+.MuiDataGrid-columnHeaderTitle.css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+  font-weight: bold;
+}
+
 .css-ptiqhd-MuiSvgIcon-root {
-  fill: #fff;
+  color: #000;
+}
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
+  background-color: pink;
 }
 
 .buttons {
@@ -188,23 +258,81 @@ label {
 
 .logo {
   height: 118px;
+  width: auto;
+}
+@media (max-width: 620px) {
+  .logo {
+    height: 100px;
+  }
 }
 
 .header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  margin: 20px 0;
   position: relative;
+  top: -109px;
+  top: -123px;
+}
+@media (max-width: 1000px) {
+  .header {
+    top: 0;
+  }
 }
 
 .navigation {
-  position: relative;
-  top: 45px;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 1000px) {
+  .navigation {
+    flex-direction: row;
+  }
+}
+@media (max-width: 690px) {
+  .navigation {
+    flex-direction: column;
+  }
+}
+
+.nav-link {
   padding: 20px;
-  border-radius: 20px 20px 0 0;
+  border-radius: 0 20px 20px 0;
   border: 1px solid rgba(67, 85, 0, 0.3882352941);
-  text-align: end;
   background-color: #435500;
+  width: 250px;
+  height: 18px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 1500px) {
+  .nav-link {
+    width: 195px;
+  }
+}
+@media (max-width: 1000px) {
+  .nav-link {
+    margin: 0 20px;
+  }
+}
+@media (max-width: 690px) {
+  .nav-link {
+    margin: 15px 0;
+  }
+}
+@media (max-width: 620px) {
+  .nav-link {
+    margin: 10px 0;
+    height: 10px;
+  }
 }
 
 .navigation-title {
@@ -230,111 +358,59 @@ label {
   color: #d2ddad;
 }
 
-#society-name {
-  position: absolute;
-  left: 179px;
-}
-@media (max-width: 660px) {
+@media (max-width: 620px) {
   #society-name {
-    display: flex;
-    justify-content: flex-end;
-    top: -7px;
-    right: 0;
-    text-align: right;
+    font-weight: normal;
+    font-size: 16px;
   }
 }
 
-#dashboard-name {
-  position: absolute;
-  right: 10px;
-}
-@media (max-width: 660px) {
+@media (max-width: 620px) {
   #dashboard-name {
-    display: flex;
-    justify-content: flex-end;
-    top: 65px;
-    right: 0;
+    margin: auto;
   }
+}
+
+.search-bar {
+  margin: 0 12px;
+  position: relative;
+  top: -33px;
+}
+@media (max-width: 760px) {
+  .search-bar {
+    top: 0;
+  }
+}
+
+#Search {
+  width: 320px;
+  border-style: groove;
+  border-radius: 5px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .page {
-  margin: 41px 140px;
-}
-@media (max-width: 851px) {
-  .page {
-    margin: 80px 60px;
-  }
-}
-@media (max-width: 575px) {
-  .page {
-    margin: 80px 30px;
-  }
-}
-
-.title {
-  font-size: 24px;
+  margin: auto;
 }
 
 .subtitle {
   position: relative;
-  top: 64px;
-  left: 63px;
-  margin: 0;
-  font-size: 18px;
-  color: #000;
+  top: 34px;
+  left: 123px;
+  background-color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 15px;
 }
-
-.employees-page {
-  margin: 42px 80px;
-}
-
-@media (min-width: 1655px) {
-  .employees-page .header {
-    max-width: 1480px;
-    margin: auto;
-    margin-bottom: -21px;
-  }
-}
-
-.employees-page .subtitle {
-  width: 55%;
-  top: 23px;
-  left: 32px;
-  color: #fff;
-}
-@media (max-width: 595px) {
-  .employees-page .subtitle {
-    top: 13px;
-  }
-}
-
-.employees-page .navigation {
-  position: relative;
-  text-align: end;
-  top: 64px;
-  padding: 20px;
-  border: 1px solid rgba(67, 85, 0, 0.3882352941);
-  border-radius: 20px 20px 0 0;
-  background-color: #435500;
-}
-@media (min-width: 1655px) {
-  .employees-page .navigation {
-    max-width: 1434px;
-    margin: auto;
-  }
-}
-
-.employees-page .main {
-  max-width: 1479px;
-  margin: auto;
-}
-
-@media (max-width: 690px) {
-  .employees-page #dashboard-name {
-    display: flex;
-    justify-content: flex-end;
-    top: 65px;
-    right: 0;
+@media (max-width: 620px) {
+  .subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    top: 23px;
+    left: 76px;
   }
 }
 /*# sourceMappingURL=main.css.map */

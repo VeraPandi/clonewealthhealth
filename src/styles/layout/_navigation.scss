@@ -1,32 +1,26 @@
 .navigation {
+   display: flex;
+   flex-direction: column;
    position: relative;
-   top: 45px;
-   padding: 20px;
-   border-radius: 20px 20px 0 0;
-   border: 1px solid #43550063;
-   text-align: end;
-   background-color: #435500;
+   top: -60px;
+   width: 130px;
+   align-items: center;
+   text-align: center;
 }
 
-.navigation-title {
-   font-size: 15px;
-   font-style: italic;
-   font-weight: bold;
-   letter-spacing: 1px;
-   color: #d8f07d;
-}
-
-.employees-list-link,
-.homepage-link {
-   padding: 10px;
-   border-radius: 10px;
+.nav-link {
+   width: min-content;
+   padding: 15px 34px 15px 33px;
    text-decoration: none;
-   color: #fbffefe6;
+   color: #435500;
 
-   &:hover {
-      padding-left: 39px;
-      transition: all 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
+   &.home.active,
+   &.employees.active {
+      width: inherit;
+      margin-right: -3px;
+      border-right: 3px solid #596e07;
       font-weight: bold;
       color: #d2ddad;
+      background: #344201;
    }
 }

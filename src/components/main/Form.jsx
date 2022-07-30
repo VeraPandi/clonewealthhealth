@@ -11,8 +11,18 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SelectMenu from "./SelectMenu.jsx";
 import Buttons from "./Buttons.jsx";
 import TextFields from "./TextFields.jsx";
-import DatePickers from "./DatePickers.jsx";
-import Subtitle from "../header/Subtitle.jsx";
+
+/**
+ * Displays an add employee form
+ * @const {array} employees - All information about each employee
+ * @const {number} - id
+ * @const {string} - firstName, lastName, department, streetAddress, cityAddress, stateNameAddress, codeAddress
+ * @const {object} - startDate, dateOfBirth
+ * @const {array} stateNameArray - Full state names
+ * @const {object} match - ID, name and code of a selected state
+ * @function formatDate - Formats the date of the date picker
+ * @return {JSX.Element} - Form
+ */
 
 const Form = () => {
    const dispatch = useDispatch();
@@ -92,15 +102,17 @@ const Form = () => {
    };
 
    // List of options displayed in the select menu
-   const stateNameArray = STATESNAME.map((item, i) => item.stateName);
+   const stateNameArray = STATESNAME.map((item) => item.stateName);
 
    // Get the state code to display in the placeholder
    const match = STATESNAME.find((obj) => obj.stateName === stateNameAddress);
 
-   // Format date
+   // Format date :
+   // Sets a fixed string length for the date
    function padTo2Digits(num) {
       return num.toString().padStart(2, "0");
    }
+   // Gets the month, day, and year for the date
    function formatDate(date) {
       return [
          padTo2Digits(date.getMonth() + 1),
@@ -111,8 +123,6 @@ const Form = () => {
 
    return (
       <section className="form-wrapper">
-         <Subtitle subtitle="Create Employee" />
-
          <div className="form">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                <div className="identity-fields">
@@ -131,8 +141,23 @@ const Form = () => {
                   />
                   <Stack margin="16px 0">
                      <DatePicker
-                        label="Date Picker"
-                        renderInput={(params) => <TextField {...params} />}
+                        label="Date Of Birth"
+                        renderInput={(params) => (
+                           <TextField
+                              sx={{
+                                 // Outline and label color
+                                 "& .MuiInputLabel-root.Mui-focused": {
+                                    color: "#000",
+                                 },
+                                 "& .MuiOutlinedInput-root.Mui-focused": {
+                                    "& > fieldset": {
+                                       borderColor: "#93ad18",
+                                    },
+                                 },
+                              }}
+                              {...params}
+                           />
+                        )}
                         value={dateOfBirth}
                         onChange={(newValue) => setDateOfBirth(newValue)}
                      />
@@ -154,6 +179,7 @@ const Form = () => {
                      event={onCityAddressChanged}
                   />
                   <SelectMenu
+                     id="State"
                      height=""
                      width="100%"
                      margin="16px 0 8px"
@@ -176,13 +202,29 @@ const Form = () => {
                   <div className="fields">
                      <Stack margin="16px 0">
                         <DatePicker
-                           label="Date Picker"
-                           renderInput={(params) => <TextField {...params} />}
+                           label="Start Date"
+                           renderInput={(params) => (
+                              <TextField
+                                 sx={{
+                                    // Outline and label color
+                                    "& .MuiInputLabel-root.Mui-focused": {
+                                       color: "#000",
+                                    },
+                                    "& .MuiOutlinedInput-root.Mui-focused": {
+                                       "& > fieldset": {
+                                          borderColor: "#93ad18",
+                                       },
+                                    },
+                                 }}
+                                 {...params}
+                              />
+                           )}
                            value={startDate}
                            onChange={(newValue) => setStartDate(newValue)}
                         />
                      </Stack>
                      <SelectMenu
+                        id="Department"
                         height="56px"
                         width="100%"
                         margin=""

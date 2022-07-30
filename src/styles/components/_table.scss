@@ -3,13 +3,10 @@
    flex-direction: column;
    align-items: center;
    margin: 44px 0 60px;
-   text-transform: none;
-
-   @media (max-width: 594px) {
-      margin: 23px 0 60px;
-   }
+   text-transform: uppercase;
 }
 
+// Row color in the table
 .MuiDataGrid-row:nth-child(odd) {
    background: #fff;
 }
@@ -17,6 +14,16 @@
    background: #6f85090f;
 }
 
+// Text in table header
+.MuiDataGrid-columnHeaderTitle.css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+   font-weight: bold;
+}
+
+// Icon color in table header
 .css-ptiqhd-MuiSvgIcon-root {
-   fill: #fff;
+   color: #000;
+}
+
+.MuiDataGrid-main.css-204u17-MuiDataGrid-main {
+   border-radius: 20px;
 }
