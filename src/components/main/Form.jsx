@@ -126,6 +126,9 @@ const Form = () => {
       setCityAddress("");
       setStateNameAddress("");
       setCodeAddress("");
+
+      setError(false);
+      setHelperText("");
    };
 
    const closeModal = () => {
