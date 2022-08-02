@@ -1,0 +1,35 @@
+.notFound {
+   position: relative;
+}
+
+.notFound-main {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   min-height: 100vh;
+   margin: 0;
+}
+
+.notFound-content {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+}
+
+.error-code {
+   font-size: 100px;
+   font-weight: 500;
+   color: #6f8509;
+}
+
+.error-message {
+   margin: 50px;
+   text-align: center;
+   font-weight: normal;
+}
+
+.back-link {
+   color: #2c3e50;
+}
