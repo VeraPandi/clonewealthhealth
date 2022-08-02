@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "../components/main/Table";
 
-const EmployeeList = () => {
+const Employees = () => {
    return (
       <div className="page-wrapper">
          <main className="main">
@@ -11,4 +11,4 @@ const EmployeeList = () => {
    );
 };
 
-export default EmployeeList;
+export default Employees;

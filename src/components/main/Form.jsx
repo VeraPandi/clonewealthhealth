@@ -3,24 +3,34 @@ import { useSelector, useDispatch } from "react-redux";
 import { STATESNAME } from "../../services/STATES.js";
 import { DEPARTMENTS } from "../../services/DEPARTMENTS.js";
 import { employeeAdded, selectAllEmployees } from "../../features/slices.js";
+import store from "../../utils/store.js";
 import Stack from "@mui/material/Stack";
-import { TextField } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import SelectMenu from "./SelectMenu.jsx";
 import Buttons from "./Buttons.jsx";
-import TextFields from "./TextFields.jsx";
+import Textfield from "./Textfield.jsx";
+import Datepicker from "./Datepicker.jsx";
+import Modal from "./Modal.jsx";
 
 /**
  * Displays an add employee form
+ * States for form submission
  * @const {array} employees - All information about each employee
  * @const {number} - id
  * @const {string} - firstName, lastName, department, streetAddress, cityAddress, stateNameAddress, codeAddress
  * @const {object} - startDate, dateOfBirth
  * @const {array} stateNameArray - Full state names
- * @const {object} match - ID, name and code of a selected state
+ * @const {object} matchState - ID, name and code of a selected state
  * @function formatDate - Formats the date of the date picker
+ * @const {boolean} error - "True" if an empty field is detected when the form is submitted
+ * @const {string} helperText - Empty field error message
+ *
+ * States for the launch of the modal
+ * @const {boolean} modalIsOpen - Modal open state
+ * @const {object} currentEmployees - Number of current employees in the store (after submitting a new employee)
+ * @const {object} previousEmployees - Number of previous employees in the store (before submitting a new employee)
+ *
  * @return {JSX.Element} - Form
  */
 
@@ -38,6 +48,12 @@ const Form = () => {
    const [cityAddress, setCityAddress] = useState("");
    const [stateNameAddress, setStateNameAddress] = useState("");
    const [codeAddress, setCodeAddress] = useState("");
+   const [error, setError] = useState(false);
+   const [helperText, setHelperText] = useState("");
+   // States to launch the modal when an employee is created :
+   const [modalIsOpen, setModalIsOpen] = useState(false);
+   const [currentEmployees, setCurrentEmployees] = useState(store.getState());
+   const [previousEmployees, setPreviousEmployees] = useState(store.getState());
 
    const onIdChanged = () => setId(0);
    const onFirstNameChanged = (e) => setFirstName(e.target.value);
@@ -86,7 +102,18 @@ const Form = () => {
          setCityAddress("");
          setStateNameAddress("");
          setCodeAddress("");
+
+         setError(false);
+         setHelperText("");
+      } else {
+         setError(true);
+         setHelperText("This field is empty");
       }
+
+      // States to launch the modal when an employee is created :
+      setModalIsOpen(true);
+      setCurrentEmployees(store.getState());
+      setPreviousEmployees(currentEmployees);
    };
 
    const onResetFields = () => {
@@ -101,18 +128,27 @@ const Form = () => {
       setCodeAddress("");
    };
 
+   const closeModal = () => {
+      setModalIsOpen(false);
+   };
+
    // List of options displayed in the select menu
    const stateNameArray = STATESNAME.map((item) => item.stateName);
 
    // Get the state code to display in the placeholder
-   const match = STATESNAME.find((obj) => obj.stateName === stateNameAddress);
+   const matchState = STATESNAME.find(
+      (obj) => obj.stateName === stateNameAddress
+   );
 
-   // Format date :
-   // Sets a fixed string length for the date
+   /**
+    * Get a formatted date
+    * @function padTo2Digits - Sets a fixed string length for the date
+    * @function formatDate - Gets the month, day, and year for the date
+    */
+
    function padTo2Digits(num) {
       return num.toString().padStart(2, "0");
    }
-   // Gets the month, day, and year for the date
    function formatDate(date) {
       return [
          padTo2Digits(date.getMonth() + 1),
@@ -127,55 +163,47 @@ const Form = () => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                <div className="identity-fields">
                   <h3>Identity</h3>
-                  <TextFields
+                  <Textfield
                      type="text"
                      name="First Name"
                      value={firstName}
+                     error={error}
+                     helpertext={helperText}
                      event={onFirstNameChanged}
                   />
-                  <TextFields
+                  <Textfield
                      type="text"
                      name="Last Name"
                      value={lastName}
+                     error={error}
+                     helpertext={helperText}
                      event={onLastNameChanged}
                   />
-                  <Stack margin="16px 0">
-                     <DatePicker
-                        label="Date Of Birth"
-                        renderInput={(params) => (
-                           <TextField
-                              sx={{
-                                 // Outline and label color
-                                 "& .MuiInputLabel-root.Mui-focused": {
-                                    color: "#000",
-                                 },
-                                 "& .MuiOutlinedInput-root.Mui-focused": {
-                                    "& > fieldset": {
-                                       borderColor: "#93ad18",
-                                    },
-                                 },
-                              }}
-                              {...params}
-                           />
-                        )}
-                        value={dateOfBirth}
-                        onChange={(newValue) => setDateOfBirth(newValue)}
-                     />
-                  </Stack>
+                  <Datepicker
+                     name="Date Of Birth"
+                     value={dateOfBirth}
+                     setValue={setDateOfBirth}
+                     error={error}
+                     helpertext={helperText}
+                  />
                </div>
 
                <div className="address-fields">
                   <h3>Address</h3>
-                  <TextFields
+                  <Textfield
                      type="text"
                      name="Street"
                      value={streetAddress}
+                     error={error}
+                     helpertext={helperText}
                      event={onStreetAddressChanged}
                   />
-                  <TextFields
+                  <Textfield
                      type="text"
                      name="City"
                      value={cityAddress}
+                     error={error}
+                     helpertext={helperText}
                      event={onCityAddressChanged}
                   />
                   <SelectMenu
@@ -186,13 +214,17 @@ const Form = () => {
                      array={stateNameArray}
                      name="State"
                      value={stateNameAddress}
+                     error={error}
+                     helpertext={helperText}
                      event={onStateNameAddressChanged}
-                     placeholder={match && match.stateCode}
+                     placeholder={matchState && matchState.stateCode}
                   />
-                  <TextFields
+                  <Textfield
                      type="text"
                      name="Zip Code"
                      value={codeAddress}
+                     error={error}
+                     helpertext={helperText}
                      event={onCodeAddressChanged}
                   />
                </div>
@@ -200,29 +232,13 @@ const Form = () => {
                <div className="status-fields">
                   <h3>Status</h3>
                   <div className="fields">
-                     <Stack margin="16px 0">
-                        <DatePicker
-                           label="Start Date"
-                           renderInput={(params) => (
-                              <TextField
-                                 sx={{
-                                    // Outline and label color
-                                    "& .MuiInputLabel-root.Mui-focused": {
-                                       color: "#000",
-                                    },
-                                    "& .MuiOutlinedInput-root.Mui-focused": {
-                                       "& > fieldset": {
-                                          borderColor: "#93ad18",
-                                       },
-                                    },
-                                 }}
-                                 {...params}
-                              />
-                           )}
-                           value={startDate}
-                           onChange={(newValue) => setStartDate(newValue)}
-                        />
-                     </Stack>
+                     <Datepicker
+                        name="Start Date"
+                        value={startDate}
+                        setValue={setStartDate}
+                        error={error}
+                        helpertext={helperText}
+                     />
                      <SelectMenu
                         id="Department"
                         height="56px"
@@ -231,6 +247,8 @@ const Form = () => {
                         array={DEPARTMENTS}
                         name="Department"
                         value={department}
+                        error={error}
+                        helpertext={helperText}
                         event={onDepartmentChanged}
                         placeholder=""
                      />
@@ -254,6 +272,19 @@ const Form = () => {
                   </Stack>
                </div>
             </LocalizationProvider>
+         </div>
+
+         <div>
+            {/* If a new employee has been added in the store, the modal is launched */}
+            {modalIsOpen &&
+               currentEmployees.employees.length >
+                  previousEmployees.employees.length && (
+                  <Modal
+                     props={modalIsOpen}
+                     setProps={closeModal}
+                     text="Employee created!"
+                  />
+               )}
          </div>
       </section>
    );

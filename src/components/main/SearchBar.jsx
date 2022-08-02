@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TextFields from "./TextFields";
+import Textfield from "./Textfield";
 
 /**
  * Displays a Search bar
@@ -41,10 +41,12 @@ const SearchBar = ({ array, setData }) => {
 
    return (
       <div className="search-bar">
-         <TextFields
+         <Textfield
             type="search"
             name="Search"
             value={searchText}
+            error={false}
+            helpertext=""
             event={(e) => onChange(e.target.value)}
          />
       </div>
