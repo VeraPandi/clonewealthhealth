@@ -1,9 +1,4 @@
-import {
-   BrowserRouter as Router,
-   Routes,
-   Route,
-   Navigate,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Employees from "./pages/Employees";
 import NotFound from "./pages/NotFound";
@@ -12,14 +7,13 @@ import "./styles/main.scss";
 
 function App() {
    return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
          <div className="page">
             <Sidebar />
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/employees" element={<Employees />} />
-               <Route path="/404" element={<NotFound />} />
-               <Route path="*" element={<Navigate replace to="/404" />} />
+               <Route path="*" element={<NotFound />} />
             </Routes>
          </div>
       </Router>
