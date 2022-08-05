@@ -11,9 +11,11 @@ import SelectMenu from "./SelectMenu.jsx";
 import Buttons from "./Buttons.jsx";
 import Textfield from "./Textfield.jsx";
 import Datepicker from "./Datepicker.jsx";
+import { Modal } from "react-modal-vpdi";
 
 /**
  * Displays an add employee form
+ *
  * States for form submission
  * @const {array} employees - All information about each employee
  * @const {number} - id
@@ -24,6 +26,11 @@ import Datepicker from "./Datepicker.jsx";
  * @function formatDate - Formats the date of the date picker
  * @const {boolean} error - "True" if an empty field is detected when the form is submitted
  * @const {string} helperText - Empty field error message
+ *
+ * States for the launch of the modal
+ * @const {boolean} modalIsOpen - Modal open state
+ * @const {object} currentEmployees - Number of current employees in the store (after submitting a new employee)
+ * @const {object} previousEmployees - Number of previous employees in the store (before submitting a new employee)
  *
  * @return {JSX.Element} - Form
  */
@@ -44,6 +51,10 @@ const Form = () => {
    const [codeAddress, setCodeAddress] = useState("");
    const [error, setError] = useState(false);
    const [helperText, setHelperText] = useState("");
+   // States to launch the modal when an employee is created :
+   const [modalIsOpen, setModalIsOpen] = useState(false);
+   const [currentEmployees, setCurrentEmployees] = useState(store.getState());
+   const [previousEmployees, setPreviousEmployees] = useState(store.getState());
 
    const onIdChanged = () => setId(0);
    const onFirstNameChanged = (e) => setFirstName(e.target.value);
@@ -99,6 +110,11 @@ const Form = () => {
          setError(true);
          setHelperText("This field is empty");
       }
+
+      // States to launch the modal when an employee is created :
+      setModalIsOpen(true);
+      setCurrentEmployees(store.getState());
+      setPreviousEmployees(currentEmployees);
    };
 
    const onResetFields = () => {
@@ -114,6 +130,10 @@ const Form = () => {
 
       setError(false);
       setHelperText("");
+   };
+
+   const closeModal = () => {
+      setModalIsOpen(false);
    };
 
    // List of options displayed in the select menu
@@ -256,6 +276,19 @@ const Form = () => {
                   </Stack>
                </div>
             </LocalizationProvider>
+         </div>
+
+         <div>
+            {/* If a new employee has been added in the store, the modal is launched */}
+            {modalIsOpen &&
+               currentEmployees.employees.length >
+                  previousEmployees.employees.length && (
+                  <Modal
+                     modalState={modalIsOpen}
+                     setModalState={closeModal}
+                     text="Employee created!"
+                  />
+               )}
          </div>
       </section>
    );
