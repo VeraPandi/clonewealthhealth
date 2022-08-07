@@ -1,7 +1,22 @@
 .modal {
-   background-color: #435500;
+   position: relative;
+   width: 324px;
+   margin: 9px 5%;
+   padding: 12px 28px;
+   background-color: #f9fbf4;
+   border: 2px solid #6f8509;
+}
+
+.modal-close-btn {
+   top: -14px;
+   left: 287px;
+   color: #435500;
 }
 
 .modal-text {
-   font-size: 18px;
+   position: relative;
+   left: -24px;
+   font-size: 17px;
+   letter-spacing: 0.6px;
+   color: #435500;
 }

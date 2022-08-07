@@ -1,14 +1,15 @@
 .search-bar {
    display: flex;
-   justify-content: end;
-   margin: 0 12px;
+   justify-content: flex-end;
+   max-width: 1478px;
+   margin: 27px 0;
 }
 
 #Search {
    width: 320px;
-   border-style: groove;
-   border-radius: 5px;
    font-size: 16px;
    text-transform: uppercase;
+   border-style: groove;
+   border-radius: 5px;
    cursor: pointer;
 }

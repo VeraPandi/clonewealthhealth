@@ -1,9 +1,13 @@
 .buttons {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   flex-wrap: wrap;
    width: 100%;
-   margin: 15px 2.5% 3px;
+   margin: 15px 2.5% 45px;
 
    @media (max-width: 951px) {
-      margin: 40px 2.5% 3px;
+      margin: auto 2.5% 45px;
    }
 
    @media (max-width: 851px) {

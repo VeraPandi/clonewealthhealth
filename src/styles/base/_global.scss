@@ -1,3 +1,7 @@
+html {
+   background-color: #e7eadd;
+}
+
 body {
    box-sizing: border-box;
    margin: 0;
@@ -25,18 +29,29 @@ label {
    letter-spacing: 1.5px;
 }
 
+input {
+   cursor: pointer;
+}
+
 .page {
    display: flex;
    flex-direction: row;
+   margin: 3rem 2rem;
+   background-color: #fff;
+   border-radius: 20px;
 }
 
 .page-wrapper {
-   height: 100vh;
+   min-height: 824px;
    width: 100%;
    margin: auto;
+   background-color: #fff;
+   border-radius: 20px;
 }
 
 .main {
    margin: 0 40px;
    padding: 45px 0;
+   background-color: #fff;
+   border-radius: 20px;
 }

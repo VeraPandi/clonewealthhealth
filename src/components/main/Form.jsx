@@ -27,7 +27,7 @@ import { Modal } from "react-modal-vpdi";
  * @const {boolean} error - "True" if an empty field is detected when the form is submitted
  * @const {string} helperText - Empty field error message
  *
- * States for the launch of the modal
+ * States for the launch of the modal when an employee is created
  * @const {boolean} modalIsOpen - Modal open state
  * @const {object} currentEmployees - Number of current employees in the store (after submitting a new employee)
  * @const {object} previousEmployees - Number of previous employees in the store (before submitting a new employee)
@@ -39,6 +39,7 @@ const Form = () => {
    const dispatch = useDispatch();
    const employees = useSelector(selectAllEmployees);
 
+   // Form fields :
    const [id, setId] = useState(0);
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
@@ -49,9 +50,10 @@ const Form = () => {
    const [cityAddress, setCityAddress] = useState("");
    const [stateNameAddress, setStateNameAddress] = useState("");
    const [codeAddress, setCodeAddress] = useState("");
+   // Form field error messages :
    const [error, setError] = useState(false);
    const [helperText, setHelperText] = useState("");
-   // States to launch the modal when an employee is created :
+   // Modal :
    const [modalIsOpen, setModalIsOpen] = useState(false);
    const [currentEmployees, setCurrentEmployees] = useState(store.getState());
    const [previousEmployees, setPreviousEmployees] = useState(store.getState());
@@ -189,6 +191,8 @@ const Form = () => {
                      setValue={setDateOfBirth}
                      error={error}
                      helpertext={helperText}
+                     margin="16px 0"
+                     marginError="16px 0"
                   />
                </div>
 
@@ -242,6 +246,8 @@ const Form = () => {
                         setValue={setStartDate}
                         error={error}
                         helpertext={helperText}
+                        margin=""
+                        marginError=""
                      />
                      <SelectMenu
                         id="Department"
@@ -274,21 +280,18 @@ const Form = () => {
                         event={onResetFields}
                      />
                   </Stack>
+
+                  {modalIsOpen &&
+                     currentEmployees.employees.length >
+                        previousEmployees.employees.length && (
+                        <Modal
+                           modalState={modalIsOpen}
+                           setModalState={closeModal}
+                           text="Employee created!"
+                        />
+                     )}
                </div>
             </LocalizationProvider>
-         </div>
-
-         <div>
-            {/* If a new employee has been added in the store, the modal is launched */}
-            {modalIsOpen &&
-               currentEmployees.employees.length >
-                  previousEmployees.employees.length && (
-                  <Modal
-                     modalState={modalIsOpen}
-                     setModalState={closeModal}
-                     text="Employee created!"
-                  />
-               )}
          </div>
       </section>
    );

@@ -1,26 +1,26 @@
 .navigation {
    display: flex;
    flex-direction: column;
-   position: relative;
-   top: -60px;
-   width: 130px;
    align-items: center;
+   position: relative;
+   width: 130px;
    text-align: center;
 }
 
 .nav-link {
    width: min-content;
+   margin: 10px 0;
    padding: 15px 34px 15px 33px;
+   letter-spacing: 0.6px;
    text-decoration: none;
    color: #435500;
 
    &.home.active,
    &.employees.active {
       width: inherit;
-      margin-right: -3px;
-      border-right: 3px solid #596e07;
-      font-weight: bold;
-      color: #d2ddad;
-      background: #344201;
+      margin-right: -7px;
+      color: #fff;
+      background: #596e07;
+      border-radius: 4px;
    }
 }

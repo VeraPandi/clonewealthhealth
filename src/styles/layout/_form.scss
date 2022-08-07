@@ -13,8 +13,8 @@
    display: flex;
    justify-content: flex-start;
    flex-wrap: wrap;
-   padding: 40px;
-   border: 1px solid #6f850954;
+   padding: 0 40px;
+   background-color: #fff;
    border-radius: 20px;
 
    @media (min-width: 1500px) {
@@ -22,7 +22,7 @@
    }
 
    @media (max-width: 851px) {
-      padding: 60px 50px 40px 40px;
+      padding: 20px 50px 0 40px;
    }
 }
 
@@ -34,7 +34,7 @@
    margin: 20px auto;
    padding: 6px;
 
-   @media (max-width: 851px) {
+   @media (max-width: 953px) {
       min-width: 100%;
       margin: auto;
    }
@@ -43,12 +43,13 @@
 .fields {
    display: flex;
    justify-content: space-between;
-   align-items: center;
    width: 100%;
+   margin: 18px 0;
 
    @media (max-width: 953px) {
       flex-wrap: wrap;
-      width: 100%;
+      min-width: 100%;
+      margin: auto;
    }
 }
 
@@ -63,14 +64,15 @@
       width: 100%;
    }
 
-   @media (max-width: 851px) {
+   @media (max-width: 953px) {
       margin-left: 7px;
       margin-right: -5px;
       padding: 20px 0 10px;
    }
 }
 
-.fields .css-1o883tc-MuiStack-root {
+.fields .css-1o883tc-MuiStack-root,
+.fields .css-1w9br1e-MuiStack-root {
    min-width: 47.5%;
    padding-right: 6px;
 
@@ -86,7 +88,7 @@
 
    @media (max-width: 953px) {
       min-width: 100%;
-      margin: 7px 0;
+      margin: 25px 0;
       padding-left: inherit;
    }
 }

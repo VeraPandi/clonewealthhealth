@@ -96,7 +96,6 @@ const Table = () => {
                   width: "100%",
                   maxWidth: "1478px",
                   overflow: "visible",
-                  borderRadius: 20,
                }}
             >
                <Box
@@ -107,8 +106,8 @@ const Table = () => {
                         {
                            fontSize: "15px",
                            textTransform: "uppercase",
-                           color: "#d2ddad",
-                           backgroundColor: "#435500",
+                           color: "#fff",
+                           backgroundColor: "#596e07",
                         },
                   }}
                >
@@ -122,6 +121,7 @@ const Table = () => {
                         height: "100%",
                         overflow: "visible",
                         borderRadius: 20,
+                        borderColor: "transparent",
                         backgroundColor: "#fff",
                      }}
                      rows={data}

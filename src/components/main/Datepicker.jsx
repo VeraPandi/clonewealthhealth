@@ -3,9 +3,17 @@ import { Stack } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 
-const Datepicker = ({ name, value, setValue, error, helpertext }) => {
+const Datepicker = ({
+   name,
+   value,
+   setValue,
+   error,
+   helpertext,
+   margin,
+   marginError,
+}) => {
    return value || !error ? (
-      <Stack margin="16px 0">
+      <Stack margin={margin}>
          <DatePicker
             label={name}
             renderInput={(params) => (
@@ -29,7 +37,7 @@ const Datepicker = ({ name, value, setValue, error, helpertext }) => {
          />
       </Stack>
    ) : (
-      <Stack margin="16px 0">
+      <Stack margin={marginError}>
          <DatePicker
             label={name}
             renderInput={(params) => (
