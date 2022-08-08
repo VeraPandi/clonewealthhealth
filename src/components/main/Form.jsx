@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { STATESNAME } from "../../services/STATES.js";
-import { DEPARTMENTS } from "../../services/DEPARTMENTS.js";
+import { STATESNAME } from "../../services/mocks/STATES.js";
+import { DEPARTMENTS } from "../../services/mocks/DEPARTMENTS.js";
 import { employeeAdded, selectAllEmployees } from "../../features/slices.js";
 import store from "../../utils/store.js";
 import Stack from "@mui/material/Stack";
@@ -19,7 +19,7 @@ import { Modal } from "react-modal-vpdi";
  * States for form submission
  * @const {array} employees - All information about each employee
  * @const {number} - id
- * @const {string} - firstName, lastName, department, streetAddress, cityAddress, stateNameAddress, codeAddress
+ * @const {string} - firstName, lastName, department, streetAddress, cityAddress, stateNameAddress, stateCodeAddress, codeAddress
  * @const {object} - startDate, dateOfBirth
  * @const {array} stateNameArray - Full state names
  * @const {object} matchState - ID, name and code of a selected state
@@ -49,6 +49,7 @@ const Form = () => {
    const [streetAddress, setStreetAddress] = useState("");
    const [cityAddress, setCityAddress] = useState("");
    const [stateNameAddress, setStateNameAddress] = useState("");
+   const [stateCodeAddress, setStateCodeAddress] = useState("");
    const [codeAddress, setCodeAddress] = useState("");
    // Form field error messages :
    const [error, setError] = useState(false);
@@ -68,6 +69,14 @@ const Form = () => {
    const onCityAddressChanged = (e) => setCityAddress(e.target.value);
    const onStateNameAddressChanged = (e) => setStateNameAddress(e.target.value);
    const onCodeAddressChanged = (e) => setCodeAddress(e.target.value);
+
+   // List of options displayed in the select menu
+   const stateNameArray = STATESNAME.map((item) => item.stateName);
+
+   // Get the state code to display in the table
+   const matchState = STATESNAME.find(
+      (obj) => obj.stateName === stateNameAddress
+   );
 
    const onSaveEmployee = () => {
       if (
@@ -92,6 +101,7 @@ const Form = () => {
                streetAddress,
                cityAddress,
                stateNameAddress,
+               stateCodeAddress: matchState.stateCode,
                codeAddress,
             })
          );
@@ -104,6 +114,7 @@ const Form = () => {
          setStreetAddress("");
          setCityAddress("");
          setStateNameAddress("");
+         setStateCodeAddress("");
          setCodeAddress("");
 
          setError(false);
@@ -128,6 +139,7 @@ const Form = () => {
       setStreetAddress("");
       setCityAddress("");
       setStateNameAddress("");
+      setStateCodeAddress("");
       setCodeAddress("");
 
       setError(false);
@@ -137,14 +149,6 @@ const Form = () => {
    const closeModal = () => {
       setModalIsOpen(false);
    };
-
-   // List of options displayed in the select menu
-   const stateNameArray = STATESNAME.map((item) => item.stateName);
-
-   // Get the state code to display in the placeholder
-   const matchState = STATESNAME.find(
-      (obj) => obj.stateName === stateNameAddress
-   );
 
    /**
     * Get a formatted date
@@ -225,7 +229,6 @@ const Form = () => {
                      error={error}
                      helpertext={helperText}
                      event={onStateNameAddressChanged}
-                     placeholder={matchState && matchState.stateCode}
                   />
                   <Textfield
                      type="text"
@@ -260,7 +263,6 @@ const Form = () => {
                         error={error}
                         helpertext={helperText}
                         event={onDepartmentChanged}
-                        placeholder=""
                      />
                   </div>
                </div>

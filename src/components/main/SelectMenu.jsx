@@ -13,7 +13,6 @@ const SelectMenu = ({
    event,
    value,
    width,
-   placeholder,
    height,
    margin,
    error,
@@ -47,13 +46,7 @@ const SelectMenu = ({
             >
                {name}
             </InputLabel>
-            <Select
-               id={id}
-               value={value}
-               onChange={event}
-               label={name}
-               placeholder={placeholder}
-            >
+            <Select id={id} value={value} onChange={event} label={name}>
                <MenuItem value="">
                   <em>None</em>
                </MenuItem>
@@ -98,7 +91,6 @@ const SelectMenu = ({
                error={error}
                onChange={event}
                label={name}
-               placeholder={placeholder}
             >
                <MenuItem value="">
                   <em>None</em>

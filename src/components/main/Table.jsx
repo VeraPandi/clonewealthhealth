@@ -64,10 +64,10 @@ const Table = () => {
          width: 160,
       },
       {
-         field: "stateNameAddress",
+         field: "stateCodeAddress",
          headerName: "State",
-         headerClassName: "stateNameAddress",
-         width: 160,
+         headerClassName: "stateCodeAddress",
+         width: 96,
       },
       {
          field: "codeAddress",
@@ -94,7 +94,7 @@ const Table = () => {
                      (pageSize === 10 && 714) ||
                      (pageSize === 20 && 1314),
                   width: "100%",
-                  maxWidth: "1478px",
+                  maxWidth: "1414px",
                   overflow: "visible",
                }}
             >
@@ -102,7 +102,7 @@ const Table = () => {
                   sx={{
                      height: "100%",
                      width: "100%",
-                     "& .firstName,.lastName,.startDate,.department,.dateOfBirth,.streetAddress,.cityAddress,.stateNameAddress,.codeAddress":
+                     "& .firstName,.lastName,.startDate,.department,.dateOfBirth,.streetAddress,.cityAddress,.stateCodeAddress,.codeAddress":
                         {
                            fontSize: "15px",
                            textTransform: "uppercase",

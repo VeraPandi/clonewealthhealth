@@ -1,4 +1,4 @@
-export const MOCK_DATA = [
+export const EMPLOYEES = [
    {
       id: 1,
       firstName: "Gwynne",
