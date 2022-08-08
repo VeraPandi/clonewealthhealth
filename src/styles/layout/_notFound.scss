@@ -1,5 +1,6 @@
 .notFound {
    position: relative;
+   width: 100%;
 }
 
 .notFound-main {
@@ -22,12 +23,21 @@
    font-size: 100px;
    font-weight: 500;
    color: #6f8509;
+
+   @media (max-width: 760px) {
+      font-size: 75px;
+   }
 }
 
 .error-message {
    margin: 50px;
+   font-size: 24px;
    text-align: center;
    font-weight: normal;
+
+   @media (max-width: 760px) {
+      font-size: 20px;
+   }
 }
 
 .back-link {
