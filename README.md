@@ -1,21 +1,23 @@
 # Wealthhealth : HRNet
 
-[![forthebadge](https://img.shields.io/badge/Made%20with-Create%20React%20App-%2361dafb)](https://reactjs.org/docs/create-a-new-react-app.html) [![forthebadge](https://img.shields.io/badge/Use-Redux-%23764abc)](https://recharts.org/en-US/) [![forthebadge](https://img.shields.io/badge/Use-Material%20UI-%230072E5)](https://mui.com/)
+[![forthebadge](https://img.shields.io/badge/Made%20with-Create%20React%20App-%230bcca7)](https://reactjs.org/docs/create-a-new-react-app.html) [![forthebadge](https://img.shields.io/badge/Use-Redux%20Toolkit-%23764abc)](https://redux-toolkit.js.org/) [![forthebadge](https://img.shields.io/badge/Use-Material%20UI-%230072E5)](https://mui.com/)
 
 **_"Converting jQuery app to React app"_**
 
 ### Resources:
 
--  [JQuery app](https://github.com/OpenClassrooms-Student-Center/P12_Front-end)
+-  [JQuery app](https://github.com/OpenClassrooms-Student-Center/P12_Front-end) ([Demo](https://verapandi.github.io/WealthHealth_JQueryVersion/))
 -  [Issues](https://github.com/OpenClassrooms-Student-Center/P12_Front-end/issues/)
 
-### Achievement
+### Achievement:
 
-See the project online: [Demo](https://verapandi.github.io/wealthhealth/)
+![HRnet-React-sm](https://user-images.githubusercontent.com/84042427/184150500-f4937a8b-9c3b-48ea-9fda-35266c828ae8.png)
+
+See the React app online: [Demo](https://verapandi.github.io/wealthhealth/)
 
 ---
 
-# Installation guide
+# Installation
 
 ### Prerequisites:
 
